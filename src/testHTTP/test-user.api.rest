@@ -1,0 +1,54 @@
+### User login
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "spolmag@gmail.com",
+    "password": "pass1234"
+}
+
+### User logout
+POST http://localhost:3000/api/user/logout
+Content-Type: application/json
+
+{
+    "email": "spolmag@gmail.com",
+    "password": "mrkratai"
+}
+
+### Get all users
+GET http://localhost:3000/api/user
+
+### Create new user
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "userName": "Jim Roger",
+    "email": "jimroger@mail.com",
+    "password": "pass1234",
+    "role":"user"
+}
+
+### Update user
+PUT http://localhost:3000/api/user/6a3cdd3f66f0da760b29a589
+Content-Type: application/json
+
+{
+    "userName": "Ratchadapong Polmag",
+    "email": "ratchapong@mail.com",
+    "role":"admin"
+}
+
+### Delete user
+
+DELETE http://localhost:3000/api/user/6a3d28c1f5fcbffc1b2201f3
+
+### Change password
+PUT http://localhost:3000/api/user/me/password
+Content-Type: application/json
+
+{
+    "currentPassword":"pass1234",
+    "newPassword": "mrkratai"
+}

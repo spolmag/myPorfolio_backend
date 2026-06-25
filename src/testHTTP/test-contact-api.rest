@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:3000/api
+
+### Get all contacts
+GET http://localhost:3000/api/contact
+
+### Create new contact
+POST http://localhost:3000/api/contact
+Content-Type: application/json
+
+{
+    "name": "Suttipong",
+    "email": "suttipong@mail.com",
+    "phone": "0890000000",
+    "lineId": "spolmag",
+    "message": "Test message 2"
+}
