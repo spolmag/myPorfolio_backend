@@ -24,6 +24,10 @@ const contactSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isClosed: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );

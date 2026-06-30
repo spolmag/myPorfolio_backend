@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "email": "spolmag@gmail.com",
-    "password": "pass1234"
+    "password": "mrkratai"
 }
 
 ### User logout
@@ -52,3 +52,16 @@ Content-Type: application/json
     "currentPassword":"pass1234",
     "newPassword": "mrkratai"
 }
+
+### Update profile
+PUT http://localhost:3000/api/user/me
+Content-Type: application/json
+
+{
+    "userName": "Suttipong Polmag"
+}
+
+### Get login user profile
+
+GET http://localhost:3000/api/user/me
+Content-Type: application/json

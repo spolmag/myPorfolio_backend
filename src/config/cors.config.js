@@ -1,4 +1,4 @@
 export const corsOption = {
   origin: ["http://localhost:5173"],
-  credential: true,
+  credentials: true,
 };

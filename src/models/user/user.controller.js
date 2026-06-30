@@ -83,13 +83,13 @@ export const userLogout = (req, res) => {
 
   res.clearCookie("accessToken", {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: isPord,
+    sameSite: isPord ? "none" : "lax",
     path: "/",
   });
   return res
     .status(200)
-    .json({ sucess: true, message: "Logout successfully." });
+    .json({ success: true, message: "Logout successfully." });
 };
 
 export const getUsers = async (req, res, next) => {
@@ -149,7 +149,7 @@ export const updateUser = async (req, res, next) => {
     if (role !== undefined) foundUser.role = role;
 
     const saveUser = await foundUser.save();
-    return res.status(200).json({ sucess: true, data: foundUser });
+    return res.status(200).json({ success: true, data: foundUser });
   } catch (error) {
     next(error);
   }
@@ -207,6 +207,55 @@ export const changePassword = async (req, res, next) => {
     return res
       .status(200)
       .json({ success: true, message: "Password change successful" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateMyProfile = async (req, res, next) => {
+  const { userName } = req.body || {};
+  try {
+    const userId = req.user?.userId;
+    const foundUser = await User.findById(userId);
+    if (!foundUser) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found!" });
+    }
+    if (userName !== undefined) {
+      foundUser.userName = userName;
+    }
+    const saveUser = await foundUser.save();
+    return res.status(200).json({
+      success: true,
+      message: "User name update successfully.",
+      data: { _id: saveUser._id, userName: saveUser.userName },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getMyProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User session end or session not found!",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (error) {
     next(error);
   }
